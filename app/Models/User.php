@@ -45,6 +45,19 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'date_of_birth' => 'date',
         ];
+    }
+
+    public function calendars()
+    {
+        return $this->hasMany(Calendar::class);
+    }
+
+    public function sharedCalendars()
+    {
+        return $this->belongsToMany(Calendar::class, 'user_calendar')
+                    ->withPivot('access_type', 'color')
+                    ->withTimestamps();
     }
 }
