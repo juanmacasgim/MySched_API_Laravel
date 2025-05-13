@@ -17,10 +17,10 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
+        'start_date',
+        'end_date',
         'start_time',
         'end_time',
-        'start_time_event',
-        'end_time_event',
         'completed',
     ];
 
@@ -30,10 +30,10 @@ class Task extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
-        'start_time_event' => 'datetime:H:i:s',
-        'end_time_event' => 'datetime:H:i:s',
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
+        'start_time' => 'datetime:H:i:s',
+        'end_time' => 'datetime:H:i:s',
         'completed' => 'boolean',
     ];
 }

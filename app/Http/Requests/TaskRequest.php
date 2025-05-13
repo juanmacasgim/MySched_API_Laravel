@@ -11,7 +11,7 @@ class TaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,10 +24,10 @@ class TaskRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'start_time' => 'required|date',
-            'end_time' => 'nullable|date|after_or_equal:start_time',
-            'start_time_event' => 'nullable|date_format:H:i:s',
-            'end_time_event' => 'nullable|date_format:H:i:s',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_time',
+            'start_time' => 'nullable|date_format:H:i:s',
+            'end_time' => 'nullable|date_format:H:i:s',
             'completed' => 'boolean'
         ];
     }

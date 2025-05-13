@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -27,15 +29,18 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):JsonResponse
-    {
-        $task = Task::create($request->validated());
-        if(!$task){
+    public function store(TaskRequest $request):JsonResponse
+    {   
+        try {
+            $task = Task::create($request->validated());
+        } catch (QueryException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Task not created',
+                'data' => $e->getMessage()
             ], 400);
         }
+
         return response()->json([
             'success' => true,
             'message' => 'Task created successfully',
@@ -82,7 +87,15 @@ class TaskController extends Controller
                 'message' => 'Task not found',
             ], 404);
         }
-        $task->update($request->validated());
+        try {
+            $task->update($request->all());
+        } catch (QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Task not updated',
+                'data' => $e->getMessage()
+            ], 400);
+        }
         return response()->json([
             'success' => true,
             'message' => 'Task updated successfully',

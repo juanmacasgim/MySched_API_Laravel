@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CalendarRequest;
 use App\Models\Calendar;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -26,15 +28,17 @@ class CalendarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):JsonResponse
-    {
-        $calendar = Calendar::create($request->validated());
-        if(!$calendar){
+    public function store(CalendarRequest $request):JsonResponse
+    {   
+        try {
+            $calendar = Calendar::create($request->validated());
+        } catch (QueryException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Calendar not created',
             ], 400);
         }
+
         return response()->json([
             'success' => true,
             'message' => 'Calendar created successfully',
@@ -81,7 +85,15 @@ class CalendarController extends Controller
                 'message' => 'Calendar not found',
             ], 404);
         }
-        $calendar->update($request->validated());
+
+        try {
+            $calendar->update($request->all());
+        } catch (QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Calendar not updated',
+            ], 400);
+        }
         return response()->json([
             'success' => true,
             'message' => 'Calendar updated successfully',

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Casts\Json;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -28,15 +30,17 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request):JsonResponse
+    public function store(EventRequest $request):JsonResponse
     {
-        $event = Event::create($request->validated());
-        if(!$event){
+        try {
+            $event = Event::create($request->validated());
+        } catch (QueryException $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Event not created',
             ], 400);
         }
+
         return response()->json([
             'success' => true,
             'message' => 'Event created successfully',
@@ -83,7 +87,16 @@ class EventController extends Controller
                 'message' => 'Event not found',
             ], 404);
         }
-        $event->update($request->validated());
+
+        try {
+            $event->update($request->all());
+        } catch (QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Event not updated',
+            ], 400);
+        }
+        
         return response()->json([
             'success' => true,
             'message' => 'Event updated successfully',
