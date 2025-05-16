@@ -186,7 +186,7 @@ class DatabaseTestingSeeder extends Seeder
 
         foreach ($relations_events_calendar as $relation) {
             $calendar = Calendar::where('name', $relation['calendar_name'])->first();
-        
+
             if ($calendar) {
                 DB::table('events')->updateOrInsert(
                     ['calendar_id' => $calendar->id, 'title' => $relation['title']],
@@ -217,6 +217,38 @@ class DatabaseTestingSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'user_id' => 2,
+                'title' => 'Tarea 2',
+                'description' => 'Descripción de la tarea 2',
+                'completed' => false,
+                'start_date' => '2025-06-02 10:00:00',
+                'end_date' => '2025-06-02 12:00:00',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
         ]);
+
+        $relations_tasks_events = [
+            [
+                'task_title' => 'Tarea 2',
+                'event_title' => 'Cumpleaños de Usuario 1',
+            ]
+        ];
+
+        foreach ($relations_tasks_events as $relation) {
+            $task = DB::table('tasks')->where('title', $relation['task_title'])->first();
+            $event = DB::table('events')->where('title', $relation['event_title'])->first();
+
+            if ($task && $event) {
+                DB::table('task_event')->updateOrInsert(
+                    [
+                        'task_id' => $task->id,
+                        'event_id' => $event->id
+                    ]
+
+                );
+            }
+        }
     }
 }
