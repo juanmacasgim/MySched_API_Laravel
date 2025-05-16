@@ -15,6 +15,7 @@ class Task extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'user_id',
         'title',
         'description',
         'start_date',
@@ -36,4 +37,9 @@ class Task extends Model
         'end_time' => 'datetime:H:i:s',
         'completed' => 'boolean',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

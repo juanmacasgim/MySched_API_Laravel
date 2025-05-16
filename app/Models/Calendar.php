@@ -24,7 +24,7 @@ class Calendar extends Model
         'color',
     ];
 
-   public function user()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

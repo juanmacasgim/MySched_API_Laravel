@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('title'); // Title of the task
             $table->string('description')->nullable(); // Description of the task
             $table->dateTime('start_date'); // Start time of the task ex: 2025-04-22 00:00:00
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->time('end_time')->nullable(); // End time of the task: ex: 23:59:59
             $table->timestamps();
             $table->boolean('completed')->default(false); // Task completion status
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

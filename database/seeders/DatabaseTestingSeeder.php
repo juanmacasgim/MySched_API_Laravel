@@ -208,6 +208,7 @@ class DatabaseTestingSeeder extends Seeder
 
         DB::table('tasks')->insert([
             [
+                'user_id' => 1,
                 'title' => 'Tarea 1',
                 'description' => 'Descripción de la tarea 1',
                 'completed' => false,
