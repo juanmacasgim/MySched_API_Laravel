@@ -12,6 +12,7 @@ Route::post('api/login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->resource('api/users', UserController::class);
 Route::middleware('auth:sanctum')->resource('api/calendars', CalendarController::class);
+Route::middleware('auth:sanctum')->get('api/calendars/{calendarId}/events', [EventController::class, 'eventsByCalendar']);
 Route::middleware('auth:sanctum')->resource('api/events', EventController::class);
 Route::middleware('auth:sanctum')->resource('api/tasks', TaskController::class);
 

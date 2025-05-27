@@ -22,7 +22,7 @@ class CalendarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'exists:users,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'type' => 'required|in:standard_calendar,daily_journal,timetable,shift_roster',

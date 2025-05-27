@@ -14,7 +14,7 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index():JsonResponse
+    public function index(): JsonResponse
     {
         return response()->json(Event::all(), 200);
     }
@@ -30,7 +30,7 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(EventRequest $request):JsonResponse
+    public function store(EventRequest $request): JsonResponse
     {
         try {
             $event = Event::create($request->validated());
@@ -51,10 +51,10 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id):JsonResponse
+    public function show(string $id): JsonResponse
     {
         $event = Event::find($id);
-        if(!$event){
+        if (!$event) {
             return response()->json([
                 'success' => false,
                 'message' => 'Event not found',
@@ -78,10 +78,10 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id):JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
         $event = Event::find($id);
-        if(!$event){
+        if (!$event) {
             return response()->json([
                 'success' => false,
                 'message' => 'Event not found',
@@ -96,7 +96,7 @@ class EventController extends Controller
                 'message' => 'Event not updated',
             ], 400);
         }
-        
+
         return response()->json([
             'success' => true,
             'message' => 'Event updated successfully',
@@ -107,10 +107,10 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id):JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         $event = Event::find($id);
-        if(!$event){
+        if (!$event) {
             return response()->json([
                 'success' => false,
                 'message' => 'Event not found',
@@ -120,6 +120,21 @@ class EventController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Event deleted successfully',
+        ], 200);
+    }
+
+    public function eventsByCalendar($calendarId): JsonResponse
+    {
+        $events = Event::where('calendar_id', $calendarId)->get();
+        if (!$events) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Events not found for this calendar',
+            ], 404);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $events
         ], 200);
     }
 }
