@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Calendario de Juan Maria',
                 'description' => 'Calendario de Juan Maria Castillo Gimenez',
                 'type' => 'standard_calendar',
-                'color' => '#FF5733',
+                'color' => '#1976d2',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Diario de Juan Maria',
                 'description' => 'Diario de Juan Maria Castillo Gimenez',
                 'type' => 'daily_journal',
-                'color' => '#33FF57',
+                'color' => '#1976d2',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Calendario de Usuario 1',
                 'description' => 'Calendario de Usuario 1',
                 'type' => 'standard_calendar',
-                'color' => '#3357FF',
+                'color' => '#1976d2',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Calendario de Usuario 2',
                 'description' => 'Calendario de Usuario 2',
                 'type' => 'standard_calendar',
-                'color' => '#FF33A1',
+                'color' => '#1976d2',
                 'created_at' => now(),
                 'updated_at' => now()
             ]
@@ -88,19 +88,19 @@ class DatabaseSeeder extends Seeder
                 'user_email' => 'usuario1@gmail.com',
                 'calendar_name' => 'Calendario de Juan Maria',
                 'access_type' => 'Read',
-                'color' => '#888888'
+                'color' => '#1976d2'
             ],
             [
                 'user_email' => 'usuario2@gmail.com',
                 'calendar_name' => 'Calendario de Juan Maria',
                 'access_type' => 'Write',
-                'color' => '#0000FF'
+                'color' => '#1976d2'
             ],
             [
                 'user_email' => 'usuario2@gmail.com',
                 'calendar_name' => 'Diario de Juan Maria',
                 'access_type' => 'Read',
-                'color' => '#FFAA00'
+                'color' => '#1976d2'
             ],
         ];
 
@@ -128,7 +128,19 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Entrega de Proyecto Final',
                 'start_date' => '2025-06-06 09:00:00',
                 'end_date' => '2025-06-06 11:00:00',
-                'color' => '#FF5733',
+                'color' => '#1976d2',
+                'recurrence_type' => null,
+                'recurrence_interval' => null,
+                'recurrence_repeats' => null,
+                'recurrence_days' => null,
+            ],
+            [
+                'calendar_name' => 'Calendario de Juan Maria',
+                'title' => 'Presentaciones de Proyecto',
+                'description' => 'Presentación de Proyecto Final',
+                'start_date' => '2025-06-13 07:00:00',
+                'end_date' => '2025-06-13 09:30:00',
+                'color' => '#1976d2',
                 'recurrence_type' => null,
                 'recurrence_interval' => null,
                 'recurrence_repeats' => null,
@@ -140,7 +152,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Esto es una prueba de texto de una entrada del diario',
                 'start_date' => '2025-06-06 10:00:00',
                 'end_date' => '2025-06-06 12:00:00',
-                'color' => '#33FF57',
+                'color' => '#1976d2',
                 'recurrence_type' => null,
                 'recurrence_interval' => null,
                 'recurrence_repeats' => null,
@@ -152,7 +164,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Cumpleaños de Usuario 1',
                 'start_date' => '2023-01-01 00:00:00',
                 'end_date' => '2023-01-01 23:59:59',
-                'color' => '#3357FF',
+                'color' => '#1976d2',
                 'recurrence_type' => 'yearly',
                 'recurrence_interval' => 1,
                 'recurrence_repeats' => 1,
@@ -164,7 +176,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Cumpleaños de Usuario 2',
                 'start_date' => '2023-07-10 00:00:00',
                 'end_date' => '2023-07-10 23:59:59',
-                'color' => '#FF33A1',
+                'color' => '#1976d2',
                 'recurrence_type' => 'yearly',
                 'recurrence_interval' => 1,
                 'recurrence_repeats' => 100,
